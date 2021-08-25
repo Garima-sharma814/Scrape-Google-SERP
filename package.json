@@ -1,0 +1,23 @@
+{
+  "name": "scrape-google-serp",
+  "version": "1.0.0",
+  "description": "Scraping Google Serp using WebScrapingAPI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Garima-sharma814/Scrape-Google-SERP.git"
+  },
+  "author": "Garima Sharma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Garima-sharma814/Scrape-Google-SERP/issues"
+  },
+  "homepage": "https://github.com/Garima-sharma814/Scrape-Google-SERP#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "got": "^11.8.2"
+  }
+}
