@@ -2,73 +2,82 @@
 
 ## What is web scraping? 
 
-It is nothing but automating the task of collecting useful information from websites. There are a lot of use cases for web scraping: you might want to collect prices from various e-commerce sites for a price comparison site,you need flight times and hotel listings for a travel site, you could even be wanting to build a search engine like Google!
+In a nutshell, web scraping means automating the task of collecting useful information from websites. There are many use cases for web scraping, but here are just three ideas: collecting prices from various online stores for a price comparison site, getting flight times and hotel listings for a travel site, even building a search engine like Google!
 
 Getting started with web scraping is easy, and the process can be broken down into two main parts:
 
-- acquiring the data using an HTML request library or a headless browser,
-- and parsing the data to get the exact information you want.
+- acquiring the data using an HTML request library or a headless browser
+- parsing the data to get the exact information you want
 
 ## What is this article about and What are we going to do?
 
-This article is all about learning how to scrape data. We are going to scrape in SERP data, you can use whatever scraping tool you feel most comfortable with. Just know that from here on, the article will focus on how to get the results using [**WebScrapingAPI**](https://www.webscrapingapi.com/). Why, you might ask. It is a simple, fast and reliable REST-API that collects the HTML from any web page, it manages in the backend all possible blocking points such as proxies, Javascript rendering, IP rotations, CAPTCHAs, and many more. So, let's learn how to get the SERP data using **WebScrapingAPI** in Node.js. 
+This article is all about showing you how to get data from search engine results pages. To do that, we’ll need a scraper.
+
+You can use whatever scraping tool you feel most comfortable with. Just know that from here on, the article will focus on how to get the results using [WebScrapingAPI](https://www.webscrapingapi.com/). It’s a simple, fast, and reliable REST API that collects HTML from any web page and handles all possible problems in the backend. So, we don’t have to worry about proxy management, Javascript rendering, or CAPTCHAs.
+
+So, let’s learn how to get the SERP data using **WebScrapingAPI** in Node.js! 
 
 ### What is SERP or SERP data?
 
-Every second Google process **60,000+** searches. That means that this year there will be over **2 trillion** Google searches. Seems interesting? 
+Every second, Google processes **60,000+** searches. That means that this year there will be over **2 trillion** Google searches.
 
-Well, that’s a lot of Googling! It also means that as a digital marketer or a website developer it is more important than ever to understand Google SERP Features and how they affect your webpage.
+Well, that’s a lot of Googling! It also means that as a digital marketer or website developer, it’s more important than ever to understand Google SERP features and how they affect your webpage.
 
-SERP or Search Engine Results Pages is the result page's data that is returned by Search Engines. The search results pages data are relevant to the search keywords that are generally done manually by the users in Search Engines.
+A SERP or Search Engine Results Page is the result page's data returned by Search Engines. When you type in a keyword into Google, it will fetch the most relevant data, structured into SERPs.
 
-### Uses of SERP data 
-- SEO Monitoring.
-- Search Engine Optimization.
-- Competitor Analysis.
-- Paid ads Monitoring. 
-- Optimizing your website and ranking for SERP Features can help boost website traffic and CTRs.
-- Allows users to quickly find relevant information to their search query.
+Besides getting answers to the random questions that might pop into your head, Google SERPs are invaluable for many other reasons:
+- Search Engine Optimization
+- Competitor analysis
+- Paid ads monitoring 
+- Keyword research
 
-Sometimes we need search result pages data from all result pages and we develop *algorithm* for this. But it’s not always accurate as the Search Engines regularly keep on changing their SERP structures and algorithms and sometimes it seems impossible to scrape this data. We don’t need to panic though as there is **WebScrapingAPI** available for our ease. 
+So, SERP data can help you in two significant ways: keeping an eye on the competition and getting ahead in the search results.
+
+Sometimes we need more SERP data that can be easily copied manually. In that case, the most efficient way to collect information is to develop algorithms that do if for as. But it’s not always easy as search engines regularly change their SERP structure and search algorithms, meaning that we have to change our own code to match them. No need to panic, though. WebscrapingAPI will help extensively here.
+
 
 ## What is WebScrapingAPI ?
 
-It is one of the leading *REST API* for web scraping. **WebScrapingAPI** collects the HTML from any web page using a simple API and provides ready-to-process data to everyone in your company or maybe for personal use.
+It’s one of the leading REST APIs for web scraping. **WebScrapingAPI** collects the HTML from any web page with a simple API call and provides ready-to-process data to everyone in your company or maybe for personal use. It’s easy to integrate into your own scripts, making it a versatile and reliable tool in any developer’s arsenal.
 
 ### Perks of WebScrapingAPI
 
-- Make sure you never get blocked.
-- 100M+ Rotating proxies at your fingertips.
-- Easy to use, easy to customize.
-- Around the globe geotargeting.
-- 99.99% Uptime.
-- Automatic Scaling.
-- 24/7 Monitoring.
-- Trusted by startups and the world's largest companies.
-- Collect data from any type of webpage.
+- Make sure you never get blocked
+- 100M+ rotating proxies at your fingertips
+- Easy to use, easy to customize
+- Around the globe geotargeting
+- 99.99% Uptime
+- Automatic Scaling
+- 24/7 Monitoring
+- Collect data from any type of webpage
 
+For more info, check out [WebScrapingAPI](https://app.webscrapingapi.com/).
 
-For more info check out [WebScrapingAPI](https://www.webscrapingapi.com/)
+So let’s proceed with the tutorial to integrate WebScrapingAPI in Node.js.
 
-So let’s proceed with the tutorial to integrate *WebScrapingAPI* in Node.js.
 
 ## How to use WebScrapingAPI to scrape SERP data
 
-In the following section, we will use *Node.js* and a some libraries like [`got`](https://www.npmjs.com/package/got) and [Cheerio](https://github.com/cheeriojs/cheerio) to create the script that will get all the data from a *SERP* and format it nicely to be as understandable as possible. Let’s see how all the information presented above can be converted to tangible results:
+In the following section, we will use Node.js and some libraries like  [got](https://www.npmjs.com/package/got) and [Cheerio](https://github.com/cheeriojs/cheerio) to create the script that will get all the data from a SERP and format it nicely to be as understandable as possible. 
 
-### Let's take it step by step 
-
-**Step 1:** Get API Access Key
+Let’s see how all the information presented above can be converted to tangible results:
 
 
-The API Key is required to access the API. So first we will create an [account](https://app.webscrapingapi.com/register) and get the `API Access Key` from the dashboard.
+ ### Step 1: Get API Access Key
 
-- Register yourself at [WebScapingAPI.com](https://app.webscrapingapi.com/register) (follow the link it will redirect you there)
+
+The API Key is required to access the API. So first, we will [create an account](https://app.webscrapingapi.com/register) and get the `API Access Key` from the dashboard.
+
+- Register for free at [webscapingapi.com](https://app.webscrapingapi.com/)
 - Get the API access key
 
-You can start your [free trial](https://www.webscrapingapi.com/pricing/) with 5000 requests and access to all functionalities to test the product. For more information checkout the [pricing](https://www.webscrapingapi.com/pricing/) policy.
+You can start your [free trial](https://www.webscrapingapi.com/pricing/) with 5000 requests and access to all functionalities to test the product.
 
-After successfully creating a free account, access the *API Playground* page by smashing the **“Use API Playground”** button on the Dashboard page. The page should look like this:
+After successfully creating a free account, access the **API Playground** page through the button on the dashboard’s left side. The page should look like this:
+
+![image1](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xj8vd7rld6exglbr4vru.png)
+
+As the name suggests, this is the place where we can test the scraping tool before creating our script. Let’s copy the URL presented above in the URL input (left column), scroll down a little bit, and press the **“Send API Request”** button. This action should return a result that looks like this:
 
 ![image1](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xj8vd7rld6exglbr4vru.png)
 
@@ -78,7 +87,7 @@ As the name suggests, this is the place where we can test the scraping tool befo
 
 Now let’s build the script that is going to do the work for us.
 
-**Step 2:** Check if you have installed *node* and *npm* in your system.
+### Step 2: Check if you have installed node and npm
 Run these commands in terminal/Command line
 ```Bash 
 node -v
@@ -93,17 +102,16 @@ Output might look like
 v14.16.1
 ```
 
-If you get the version as the output of the command you have already installed *node* and *npm*,if you receive any error please try installing them from here [Node.js](https://nodejs.org/) and once you have installed *Node.js* run command `npm install -g npm` to install *npm* and repeat **Step:2**.
+If you get the version as the command’s output, you have already installed node and npm. If you receive any errors, please try installing them from [Node.js](https://nodejs.org/), and once you have installed Node.js, run `npm install -g npm` to install npm and repeat **Step 2**.
 
-
-**Step 3:** Set up new npm Package
+### Step 3: Set up new npm Package
 
 ```Bash 
 npm init -y
 ```
-This command will do a lot of the hard work at the back and create a *package.json* file which will keep a track of all the dependencies and DevDependencies we will install throughout our program.
+This command will do a lot of the hard work at the back and create a package.json file which will keep track of all the dependencies and DevDependencies we will install throughout our program.
 
-**Step 4:** Installing the packages
+### Step 4: Install the packages
 ```Bash
 npm i got cheerio
 ```
@@ -111,17 +119,18 @@ or
 ```Bash
 npm install got cheerio
 ```
+With [Cheerio](https://www.npmjs.com/package/cheerio) installed, it’ll be much easier to parse the HTML we extract.
 
-**Step 5:** Go to your favorite Code Editor/IDE 
+### Step 5: Go to your favorite Code Editor/IDE 
 
-Let's make a file named **serpScraper.js** and now we will include the modules into our script, to get the HTML of the SERP(Search Engine Results Pages).
+Let's make a file named serpScraper.js and include the modules into our script to get the results page’s HTML.
 
 ```JavaScript
 const got = require('got');
 const $ = require('cheerio');
 ```
 
-> If you face any problem using cheerio, sometimes require('packageName').default needs to be exported. So if you get an error about cheerio is not function or $ is not a function. Try using this:
+> If you face any problem using cheerio, sometimes require('packageName').default needs to be exported. So if you get an error about cheerio is not a function or $ is not a function. Try using this:
 
 ```JavaScript
 var $ = require('cheerio');
@@ -129,7 +138,7 @@ if (typeof $ != "function") $ = require("cheerio").default;
 ```
 
 
-**Step 6:** Use the `API Key`.
+### Step 6: Use the API Key
 
 We will initialize `API Access Key` to create the client to access the API.
 
@@ -147,22 +156,24 @@ const response = await got('https://api.webscrapingapi.com/v1?', {searchParams: 
 const html = response.body;
 ```
 
-Make sure to replace the “YOUR_API_KEY_HERE” string with the *API key* provided to you by our service. You can find it on the dashboard page.
+Make sure to replace the “YOUR_API_KEY_HERE” string with the *API key* provided to you by the service. You can find it on the dashboard page.
 
-**Step 7:** Inspecting the Page.
+### Step 7: Inspect the Page
 
-Let’s get back to the page we want to scrape. This is how we can select only the information we need. Right-click on the first heading and click ‘Inspect.’
+Let’s get back to the page we want to scrape. Right-click on the first heading and click ‘Inspect.’ This is how we can select only the information we need.
 
 You’ll get a new window containing the HTML source code:
 
 1. We will inspect the heading and get the class-name used to identify the heading from the source code.
+
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/19vog3s3r7umz29fdftu.png)
 
-- For the Heading we got class-name as `h3.LC20lb.DKV0Md`. The heading is contained inside the `h3` tag and the class-name is `.LC20lb.DKV0Md`.
+- For the Heading, we got the class-name `h3.LC20lb.DKV0Md`. The heading is contained inside the `h3` tag, and the class-name is `.LC20lb.DKV0Md`.
 
-> In `.LC20lb.DKV0Md`, `.LC20lb` and `.DKV0Md` are two different classes. 
+- In `.LC20lb.DKV0Md`, `.LC20lb` and `.DKV0Md` are two different classes. 
 
 2. We will inspect the link and get the class-name used to identify the paragraph from the source code.
+
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/j1ng0xn9un9mkw1duidi.png)
 
 ![Alt Text](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7j02ylaz3fc1277uxke8.png)
@@ -170,9 +181,9 @@ You’ll get a new window containing the HTML source code:
 - For the links we got class-name as `yuRUbf` which contain another `a` tag inside of it. So we will use this syntax to get the link from the page `.yuRUbf > a`.
 
 
-**Step 8:** Storing the Headings and Links in Separate Arrays.
+### Step 8: Store the headings and links in separate arrays
 
-As we have already inspected and got to know the class-name of the heading and link, we can now extract the information from the source code. Now we can go through and grab a list of links to all Node,js topics by getting them from the “attribs” section of each element.
+As we have already inspected and got to know the class-name of the heading and link, we can now extract the information from the source code. We can go through and grab a list of links to all Node.js topics by getting them from each element’s “attribs” section.
 
 Let's use them to extract the headings and links.
 
@@ -187,9 +198,9 @@ Let's use them to extract the headings and links.
   }
 ```
 
-**Step 9:** Formatting the information.
+### Step 9: Format the information
 
-As we have extracted the information from the source code, we need to format it in a human readable format.
+As we have extracted the information from the source code, we need to format it in a human-readable format.
 
 ```javaScript
 function print(links, headings) {
@@ -200,8 +211,8 @@ function print(links, headings) {
 
 print(links, headings);
 ```
- 
-**Step 10:** Putting it all together.
+
+### Step 10: Put it all together.
 
 Here is the complete code to make **WebScrapingAPI** request and get response result data.
 
@@ -268,8 +279,7 @@ To take your startup or business to their peak nowadays takes a lot more than ha
 
 All of these strategies can prove vital in one’s business. It feels good to know that web scrapers offer a huge help in tackling these problems. Adding automation to the data gathering process may be the easiest step to improve their business.
 
-We try to offer a helping hand by creating the necessary tools for these kinds of jobs. Thank you for reading the article and let me tell you that WebScraping API has a [free trial](https://www.webscrapingapi.com/pricing/)
-so that our users can test our product according to their needs.
+We try to offer a helping hand by creating the necessary tools for these kinds of jobs. Thank you for reading the article, and remember that [you can use this code too with a WebScrapingAPI free trial](https://www.webscrapingapi.com/pricing/). Give it a spin and see if it works well for your use case!
 
 ### Additional Resources
 - [WebScrapingAPI Introduction](https://docs.webscrapingapi.com/#introduction)
